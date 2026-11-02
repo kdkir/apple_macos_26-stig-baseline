@@ -26,6 +26,10 @@ If the result is not "0", this is a finding.)
   tag cci: ['CCI-000162', 'CCI-000163', 'CCI-000164', 'CCI-000171', 'CCI-001493', 'CCI-001494', 'CCI-001495']
   tag nist: ['AU-9 a', 'AU-9 a', 'AU-9 a', 'AU-12 b', 'AU-9 a', 'AU-9', 'AU-9']
 
+  describe file('/etc/security/audit_control') do
+    it { should exist }
+  end
+
   describe 'ACL entries on /etc/security/audit_control' do
     subject { command("/bin/ls -le /etc/security/audit_control").stdout.lines.map(&:strip).grep(/\A\d+: /) }
     it { should be_empty }

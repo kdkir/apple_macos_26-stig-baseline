@@ -22,10 +22,11 @@ class MacosManagedPreference < Inspec.resource(1)
 
   attr_reader :suite, :key
 
-  def initialize(suite, key, user: nil)
+  # InSpec passes resource arguments positionally, so options arrive as a Hash.
+  def initialize(suite, key, opts = {})
     @suite = suite
     @key = key
-    @user = user
+    @user = opts[:user]
   end
 
   # Native Ruby value (true/false/Integer/String/Array/Hash), or nil when the key is not set.

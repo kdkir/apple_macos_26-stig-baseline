@@ -93,11 +93,16 @@ class MacosFileStats < Inspec.resource(1)
 
   STAT_FORMAT = "'%Su:%Sg:%Lp:%N'"
 
-  # Either a list of paths, or every entry directly inside +dir+ (optionally only files of +type+).
-  def initialize(paths = nil, dir: nil, type: nil)
-    @paths = Array(paths).compact.uniq
-    @dir = dir
-    @type = type
+  # Either a list of paths, or { dir:, type: } for every entry directly inside dir
+  # (optionally only files of type). InSpec passes resource arguments positionally.
+  def initialize(paths_or_opts = nil)
+    if paths_or_opts.is_a?(Hash)
+      @paths = []
+      @dir = paths_or_opts[:dir]
+      @type = paths_or_opts[:type]
+    else
+      @paths = Array(paths_or_opts).compact.uniq
+    end
   end
 
   def entries

@@ -38,6 +38,11 @@ module MacosSshEffectiveConfigParser
   def [](keyword)
     params[keyword.to_s.downcase]
   end
+
+  # Exposed as a method because control files cannot reference library constants.
+  def fips_algorithms
+    FIPS_ALGORITHMS
+  end
 end
 
 class MacosSshdEffectiveConfig < Inspec.resource(1)

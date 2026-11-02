@@ -80,3 +80,5 @@ kitchen.local.ec2.yml
 test/macos-vm/compose.yml
 test/macos-vm/README.md
 test/macos-vm/summarize.rb
+/test/macos-vm/snapshots/
+/test/macos-vm/run*.log

@@ -83,8 +83,10 @@ done)
     end
   else
     users.each do |user|
-      describe ssh_effective_config(user) do
-        MacosSshEffectiveConfigParser::FIPS_ALGORITHMS.each do |keyword, value|
+      ssh = ssh_effective_config(user)
+
+      describe ssh do
+        ssh.fips_algorithms.each do |keyword, value|
           its([keyword]) { should cmp value }
         end
       end

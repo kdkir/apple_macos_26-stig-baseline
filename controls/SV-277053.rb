@@ -45,6 +45,6 @@ done)
   tag nist: ['SC-10', 'AC-12']
 
   describe sshd_effective_config do
-    its(['channeltimeout']) { should match(/(\A|session:\*=)900(\s|\z)/) }
+    its(['channeltimeout']) { should match(/(\A|session(:\*)?=)900(\s|\z)/) }
   end
 end

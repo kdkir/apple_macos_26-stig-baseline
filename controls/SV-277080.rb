@@ -27,6 +27,7 @@ If the result is not "0", this is a finding.)
   tag nist: ['AU-9 a', 'AU-9 a', 'AU-9 a', 'AU-12 b', 'AU-9 a', 'AU-9', 'AU-9']
 
   describe file('/etc/security/audit_control') do
+    it { should exist }
     its('group') { should cmp 'wheel' }
   end
 end
