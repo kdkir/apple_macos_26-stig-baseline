@@ -20,4 +20,13 @@ If the result is not "4", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000060']
   tag nist: ['AC-11 (1)']
+
+  profile_settings = command('/usr/bin/profiles -P -o stdout').stdout
+
+  %w[bl br tl tr].each do |corner|
+    describe "Configuration profile setting wvous-#{corner}-corner" do
+      subject { profile_settings.match?(/"wvous-#{corner}-corner" = 0\b/) }
+      it { should eq true }
+    end
+  end
 end

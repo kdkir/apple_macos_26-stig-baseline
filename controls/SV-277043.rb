@@ -44,4 +44,8 @@ done)
   tag 'documentable'
   tag cci: ['CCI-001133']
   tag nist: ['SC-10']
+
+  describe sshd_effective_config do
+    its(['clientaliveinterval']) { should cmp '900' }
+  end
 end

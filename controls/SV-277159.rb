@@ -25,4 +25,14 @@ If the result is not "0", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-001312', 'CCI-001314']
   tag nist: ['SI-11 a', 'SI-11 b']
+
+  asl_configs = ['/etc/asl.conf'] + command('/bin/ls /etc/asl').stdout.split.map { |f| "/etc/asl/#{f}" }
+  asl_files = asl_configs.flat_map { |f| file(f).content.to_s.lines.grep(/\A>/).filter_map { |l| l.split[1] } }
+  asl_files = asl_files.map { |p| p.start_with?('/') ? p : "/var/log/#{p}" }
+  offenders = macos_file_stats(asl_files).entries.select { |e| e.more_permissive_than?(0o640) }.map(&:path)
+
+  describe 'ASL log files more permissive than 0640' do
+    subject { offenders }
+    it { should be_empty }
+  end
 end

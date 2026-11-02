@@ -27,4 +27,8 @@ If the result is not "1", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-003938', 'CCI-002884', 'CCI-000172']
   tag nist: ['CM-5 (1) (b)', 'MA-4 (1) (a)', 'AU-12 c']
+
+  describe macos_audit_control do
+    its('flags') { should include 'aa' }
+  end
 end

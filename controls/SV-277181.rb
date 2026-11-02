@@ -27,4 +27,8 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000366']
   tag nist: ['CM-6 b']
+
+  describe macos_managed_preference('com.apple.SoftwareUpdate', 'ConfigDataInstall') do
+    its('value') { should eq true }
+  end
 end

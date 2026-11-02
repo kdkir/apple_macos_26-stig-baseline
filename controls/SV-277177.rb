@@ -38,4 +38,8 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-001958', 'CCI-003959']
   tag nist: ['IA-3', 'CM-7 (9) (b)']
+
+  describe macos_managed_preference('com.apple.applicationaccess', 'allowUSBRestrictedMode') do
+    its('value') { should_not eq false }
+  end
 end

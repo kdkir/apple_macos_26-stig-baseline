@@ -47,4 +47,21 @@ Update the permissions of the "/Library/Security/PolicyBanner.rtfd" file with th
   tag 'documentable'
   tag cci: ['CCI-000048', 'CCI-000050', 'CCI-001384', 'CCI-001385', 'CCI-001386', 'CCI-001387', 'CCI-001388']
   tag nist: ['AC-8 a', 'AC-8 b', 'AC-8 c 1', 'AC-8 c 2', 'AC-8 c 2', 'AC-8 c 2', 'AC-8 c 3']
+
+  expected_banner = input('policy_banner_text').split.join(' ')
+  banner_paths = %w[/Library/Security/PolicyBanner.rtf /Library/Security/PolicyBanner.rtfd].select { |p| file(p).exist? }
+
+  describe 'Policy banner documents in /Library/Security' do
+    subject { banner_paths }
+    its('count') { should eq 1 }
+  end
+
+  unless banner_paths.empty?
+    banner_text = command("/usr/bin/textutil -convert txt -stdout #{banner_paths.first}").stdout
+
+    describe "The text of #{banner_paths.first} (whitespace-normalized)" do
+      subject { banner_text.split.join(' ') }
+      it { should eq expected_banner }
+    end
+  end
 end

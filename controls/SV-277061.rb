@@ -29,4 +29,8 @@ A text editor may also be used to implement the required updates to the "/etc/se
   tag 'documentable'
   tag cci: ['CCI-000067', 'CCI-000172', 'CCI-002884']
   tag nist: ['AC-17 (1)', 'AU-12 c', 'MA-4 (1) (a)']
+
+  describe macos_audit_control do
+    its('flags') { should include 'lo' }
+  end
 end

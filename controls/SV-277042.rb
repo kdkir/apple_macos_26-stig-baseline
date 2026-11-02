@@ -27,4 +27,8 @@ Note: To ensure continued access to the operating system, consult the supplement
   tag 'documentable'
   tag cci: ['CCI-000213']
   tag nist: ['AC-3']
+
+  describe macos_managed_preference('com.apple.loginwindow', 'DisableFDEAutoLogin') do
+    its('value') { should eq true }
+  end
 end

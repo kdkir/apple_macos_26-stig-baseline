@@ -116,20 +116,25 @@ For more information on developing overlays, reference the [MITRE SAF Training](
   # This file specifies the attributes for the configurable controls
   # used by the Apple macOS 26 (Tahoe) STIG profile.
 
-  # Disable controls that are known to consistently have long run times
-  disable_slow_controls: [true or false]
+  # Authoritative time servers for your network (SV-277057)
+  approved_time_servers: [time1.example.mil, time2.example.mil]
 
-  # A unique list of administrative users
-  admins_list: [admin1, admin2, admin3]
+  # Certificate labels permitted in the System keychain (SV-277143)
+  approved_certificate_authorities: [DoD Root CA 3, DoD Root CA 4, DoD Root CA 5, DoD Root CA 6, com.apple.systemdefault, com.apple.kerberos.kdc]
 
-  # List of configuration files for the specific system
-  logging_conf_files: [
-    <dir-path-1>/*.conf
-    <dir-path-2>/*.conf
-  ]
+  # Temporary/emergency accounts that must expire within 72 hours (SV-277034)
+  temporary_accounts: [tempadmin]
 
-  ...
+  # Camera handling (SV-277099)
+  camera_installed: true
+  camera_physically_protected: false
 ```
+
+See `inspec.yml` for every input, including `banner_text`, `policy_banner_text`,
+`temporary_account_max_lifetime_seconds`, and `minimum_supported_macos_version`.
+
+The profile must run with root privileges (`--sudo` over SSH, or `sudo cinc-auditor exec ...` locally).
+See [test/macos-vm/README.md](test/macos-vm/README.md) for running it against a disposable macOS VM.
 
 > [!NOTE]
 >Inputs are variables that are referenced by control(s) in the profile that implement them.

@@ -30,4 +30,8 @@ If the result is not "false", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000381']
   tag nist: ['CM-7 a']
+
+  describe macos_managed_preference('com.apple.applicationaccess', 'allowAccountModification') do
+    its('value') { should eq false }
+  end
 end

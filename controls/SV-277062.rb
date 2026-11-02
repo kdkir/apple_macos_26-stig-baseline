@@ -43,4 +43,16 @@ fi
   tag 'documentable'
   tag cci: ['CCI-000130', 'CCI-000131', 'CCI-000132', 'CCI-000133', 'CCI-000134', 'CCI-000135', 'CCI-000159', 'CCI-001464', 'CCI-001487', 'CCI-001494', 'CCI-001495', 'CCI-001914', 'CCI-001889', 'CCI-001890', 'CCI-003938', 'CCI-002884', 'CCI-000172', 'CCI-004188']
   tag nist: ['AU-3 a', 'AU-3 b', 'AU-3 c', 'AU-3 d', 'AU-3 e', 'AU-3 (1)', 'AU-8 a', 'AU-14 (1)', 'AU-3 f', 'AU-9', 'AU-9', 'AU-12 (3)', 'AU-8 b', 'AU-8 b', 'CM-5 (1) (b)', 'MA-4 (1) (a)', 'AU-12 c', 'MA-3 (5)']
+
+  describe macos_launchd_service('com.apple.auditd') do
+    it { should be_loaded }
+  end
+
+  describe file('/etc/security/audit_control') do
+    it { should exist }
+  end
+
+  describe command('/usr/sbin/audit -c') do
+    its('stdout') { should include 'AUC_AUDITING' }
+  end
 end

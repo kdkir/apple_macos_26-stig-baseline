@@ -25,4 +25,8 @@ If the result is not "0", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000162', 'CCI-000163', 'CCI-000164', 'CCI-000171', 'CCI-001493', 'CCI-001494', 'CCI-001495']
   tag nist: ['AU-9 a', 'AU-9 a', 'AU-9 a', 'AU-12 b', 'AU-9 a', 'AU-9', 'AU-9']
+
+  describe file('/etc/security/audit_control') do
+    its('group') { should cmp 'wheel' }
+  end
 end

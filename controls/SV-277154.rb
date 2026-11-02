@@ -40,4 +40,9 @@ SUDO_END
   tag 'documentable'
   tag cci: ['CCI-000765', 'CCI-000766', 'CCI-001941', 'CCI-004047']
   tag nist: ['IA-2 (1)', 'IA-2 (2)', 'IA-2 (8)', 'IA-2 (6) (b)']
+
+  describe file('/etc/pam.d/sudo') do
+    its('content') { should match(/^auth\s+sufficient\s+pam_smartcard\.so/) }
+    its('content') { should match(/^auth\s+required\s+pam_deny\.so/) }
+  end
 end

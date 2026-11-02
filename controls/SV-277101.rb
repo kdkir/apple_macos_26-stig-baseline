@@ -35,4 +35,12 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-001312', 'CCI-001314']
   tag nist: ['SI-11 a', 'SI-11 b']
+
+  describe macos_managed_preference('com.apple.SubmitDiagInfo', 'AutoSubmit') do
+    its('value') { should eq false }
+  end
+
+  describe macos_managed_preference('com.apple.applicationaccess', 'allowDiagnosticSubmission') do
+    its('value') { should eq false }
+  end
 end

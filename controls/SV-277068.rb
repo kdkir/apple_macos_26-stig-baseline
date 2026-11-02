@@ -25,4 +25,17 @@ If the result is not a mode of 700 or less permissive, this is a finding."
   tag 'documentable'
   tag cci: ['CCI-000162', 'CCI-000163', 'CCI-000164', 'CCI-001493', 'CCI-001494', 'CCI-001495']
   tag nist: ['AU-9 a', 'AU-9 a', 'AU-9 a', 'AU-9 a', 'AU-9', 'AU-9']
+
+  audit_dir = macos_audit_control.dir
+
+  describe 'The audit log directory configured in /etc/security/audit_control' do
+    subject { audit_dir }
+    it { should_not be_nil }
+  end
+
+  if audit_dir
+    describe file(audit_dir) do
+      it { should_not be_more_permissive_than('0700') }
+    end
+  end
 end

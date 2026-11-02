@@ -24,4 +24,9 @@ If the result is not "pass", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-004066']
   tag nist: ['IA-5 (1) (h)']
+
+  describe macos_pwpolicy do
+    its('minimum_special_characters') { should_not be_nil }
+    its('minimum_special_characters') { should cmp >= 1 }
+  end
 end

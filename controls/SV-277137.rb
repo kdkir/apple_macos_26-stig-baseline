@@ -23,4 +23,15 @@ If the result is not "false", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000381']
   tag nist: ['CM-7 a']
+
+  if command('/usr/bin/uname -m').stdout.strip == 'arm64'
+    impact 0.0
+    describe 'Dictation' do
+      skip 'This requirement is not applicable to Apple Silicon-based systems.'
+    end
+  else
+    describe macos_managed_preference('com.apple.applicationaccess', 'allowDictation') do
+      its('value') { should eq false }
+    end
+  end
 end

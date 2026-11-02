@@ -27,4 +27,8 @@ If the result is not "false", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000056']
   tag nist: ['AC-11 b']
+
+  describe macos_managed_preference('com.apple.applicationaccess', 'allowFingerprintForUnlock') do
+    its('value') { should eq false }
+  end
 end

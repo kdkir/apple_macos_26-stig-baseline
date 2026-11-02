@@ -27,4 +27,20 @@ If the result is not "0", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000162', 'CCI-000163', 'CCI-000164', 'CCI-001493', 'CCI-001494', 'CCI-001495']
   tag nist: ['AU-9 a', 'AU-9 a', 'AU-9 a', 'AU-9 a', 'AU-9', 'AU-9']
+
+  audit_dir = macos_audit_control.dir
+
+  describe 'The audit log directory configured in /etc/security/audit_control' do
+    subject { audit_dir }
+    it { should_not be_nil }
+  end
+
+  if audit_dir
+    offenders = macos_file_stats(dir: audit_dir).entries.reject { |e| e.group == 'wheel' }.map(&:path)
+
+    describe "Audit log files in #{audit_dir} not group-owned by wheel" do
+      subject { offenders }
+      it { should be_empty }
+    end
+  end
 end

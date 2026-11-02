@@ -56,4 +56,18 @@ done)
   tag 'documentable'
   tag cci: ['CCI-001133']
   tag nist: ['SC-10']
+
+  users = macos_local_users.standard
+
+  if users.empty?
+    describe 'Local user accounts with UniqueID > 500' do
+      skip 'No local user accounts with UniqueID > 500 were found to evaluate.'
+    end
+  else
+    users.each do |user|
+      describe ssh_effective_config(user) do
+        its(['serveralivecountmax']) { should cmp '0' }
+      end
+    end
+  end
 end

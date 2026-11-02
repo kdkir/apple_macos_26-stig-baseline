@@ -36,4 +36,16 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000381']
   tag nist: ['CM-7 a']
+
+  describe macos_managed_preference('com.apple.applicationaccess', 'allowFindMyDevice') do
+    its('value') { should eq false }
+  end
+
+  describe macos_managed_preference('com.apple.applicationaccess', 'allowFindMyFriends') do
+    its('value') { should eq false }
+  end
+
+  describe macos_managed_preference('com.apple.icloud.managed', 'DisableFMMiCloudSetting') do
+    its('value') { should eq true }
+  end
 end

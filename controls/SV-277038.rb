@@ -45,4 +45,8 @@ done)
   tag 'documentable'
   tag cci: ['CCI-000048', 'CCI-000050']
   tag nist: ['AC-8 a', 'AC-8 b']
+
+  describe sshd_effective_config do
+    its(['banner']) { should cmp '/etc/banner' }
+  end
 end

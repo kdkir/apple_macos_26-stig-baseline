@@ -24,4 +24,15 @@ If the result is not "1", this is a finding.'
   tag 'documentable'
   tag cci: ['CCI-000366']
   tag nist: ['CM-6 b']
+
+  if command('/usr/bin/uname -m').stdout.strip != 'arm64'
+    impact 0.0
+    describe 'Recovery Lock' do
+      skip 'This requirement is not applicable to non-Apple Silicon systems.'
+    end
+  else
+    describe command('/usr/libexec/mdmclient QuerySecurityInfo') do
+      its('stdout') { should match(/IsRecoveryLockEnabled = 1/) }
+    end
+  end
 end

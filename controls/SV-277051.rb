@@ -25,4 +25,8 @@ If the result is not "1", this is a finding.'
   tag 'documentable'
   tag cci: ['CCI-000764', 'CCI-004045', 'CCI-001813']
   tag nist: ['IA-2', 'IA-2 (5)', 'CM-5 (1) (a)']
+
+  describe command('/usr/bin/dscl . -read /Users/root UserShell') do
+    its('stdout') { should match(%r{/usr/bin/false}) }
+  end
 end

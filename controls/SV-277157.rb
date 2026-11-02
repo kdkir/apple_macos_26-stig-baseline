@@ -48,4 +48,9 @@ After saving the file and exiting to the command prompt, run the following comma
   tag 'documentable'
   tag cci: ['CCI-003627', 'CCI-003628']
   tag nist: ['AC-2 (3) (a)', 'AC-2 (3) (b)']
+
+  describe macos_pwpolicy do
+    its('inactive_days') { should_not be_empty }
+    its('inactive_days') { should all eq 35 }
+  end
 end

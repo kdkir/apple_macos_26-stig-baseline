@@ -21,4 +21,13 @@ If the result does not contain a list of approved certificate authorities, this 
   tag 'documentable'
   tag cci: ['CCI-002470', 'CCI-004909']
   tag nist: ['SC-23 (5)', 'SC-17 b']
+
+  approved_cas = input('approved_certificate_authorities')
+  labels = command('/usr/bin/security find-certificate -a /Library/Keychains/System.keychain').stdout.scan(/"labl"<blob>="([^"]*)"/).flatten.uniq
+
+  describe 'Certificates in the System keychain' do
+    subject { labels }
+    it { should_not be_empty }
+    it { should all be_in approved_cas }
+  end
 end

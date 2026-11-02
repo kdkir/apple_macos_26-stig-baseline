@@ -43,4 +43,8 @@ done)
   tag 'documentable'
   tag cci: ['CCI-004045', 'CCI-001813']
   tag nist: ['IA-2 (5)', 'CM-5 (1) (a)']
+
+  describe sshd_effective_config do
+    its(['permitrootlogin']) { should cmp 'no' }
+  end
 end

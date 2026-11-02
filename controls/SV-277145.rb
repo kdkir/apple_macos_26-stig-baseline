@@ -22,4 +22,9 @@ If the result is not "pass" or fewer, this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-004066']
   tag nist: ['IA-5 (1) (h)']
+
+  describe macos_pwpolicy do
+    its('expires_every_n_days') { should_not be_empty }
+    its('expires_every_n_days') { should all be <= 180 }
+  end
 end

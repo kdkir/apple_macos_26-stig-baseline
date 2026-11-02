@@ -65,4 +65,31 @@ After saving the file and exiting to the command prompt, run the following comma
   tag 'documentable'
   tag cci: ['CCI-000016', 'CCI-001682']
   tag nist: ['AC-2 (2)', 'AC-2 (2)']
+
+  temporary_accounts = input('temporary_accounts')
+  max_lifetime = input('temporary_account_max_lifetime_seconds')
+
+  if temporary_accounts.empty?
+    impact 0.0
+    describe 'Temporary and emergency accounts (input temporary_accounts)' do
+      skip 'No temporary or emergency accounts are defined on the system; this requirement is not applicable.'
+    end
+  else
+    temporary_accounts.each do |user|
+      lifetimes = macos_pwpolicy(user).category('policyCategoryAuthentication').filter_map do |entry|
+        next unless entry.is_a?(Hash)
+
+        match = entry['policyContent'].to_s.match(/policyAttributeCurrentTime\s*<\s*policyAttributeCreationTime\s*\+\s*(\w+)/)
+        next unless match
+
+        match[1].match?(/\A\d+\z/) ? match[1].to_i : Hash(entry['policyParameters'])[match[1]].to_i
+      end
+
+      describe "Account lifetime limits (seconds) in the pwpolicy for temporary account #{user}" do
+        subject { lifetimes }
+        it { should_not be_empty }
+        it { should all be <= max_lifetime }
+      end
+    end
+  end
 end

@@ -25,4 +25,8 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-003992']
   tag nist: ['CM-14']
+
+  describe macos_managed_preference('com.apple.systempolicy.control', 'EnableAssessment') do
+    its('value') { should eq true }
+  end
 end

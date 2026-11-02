@@ -26,4 +26,8 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-004923', 'CCI-004926', 'CCI-004922']
   tag nist: ['SC-45 (1) (a)', 'SC-45 (1) (b)', 'SC-45']
+
+  describe macos_managed_preference('com.apple.timed', 'TMAutomaticTimeOnlyEnabled') do
+    its('value') { should eq true }
+  end
 end

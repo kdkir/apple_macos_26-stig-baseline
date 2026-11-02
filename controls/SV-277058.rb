@@ -27,4 +27,8 @@ Note: The service "timed" cannot be unloaded or loaded while System Integrity Pr
   tag 'documentable'
   tag cci: ['CCI-004923', 'CCI-004926', 'CCI-004922']
   tag nist: ['SC-45 (1) (a)', 'SC-45 (1) (b)', 'SC-45']
+
+  describe macos_launchd_service('com.apple.timed') do
+    it { should be_loaded }
+  end
 end

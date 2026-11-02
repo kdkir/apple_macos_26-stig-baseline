@@ -42,4 +42,9 @@ done)
   tag 'documentable'
   tag cci: ['CCI-000186', 'CCI-000765', 'CCI-000766', 'CCI-001941', 'CCI-000877', 'CCI-004046']
   tag nist: ['IA-5 (2) (a) (1)', 'IA-2 (1)', 'IA-2 (2)', 'IA-2 (8)', 'MA-4 c', 'IA-2 (6) (a)']
+
+  describe sshd_effective_config do
+    its(['passwordauthentication']) { should cmp 'no' }
+    its(['kbdinteractiveauthentication']) { should cmp 'no' }
+  end
 end

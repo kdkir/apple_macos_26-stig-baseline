@@ -20,4 +20,8 @@ If the result is not "1", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000381']
   tag nist: ['CM-7 a']
+
+  describe macos_configuration_profiles do
+    its('disabled_system_settings') { should include 'com.apple.Siri-Settings.extension' }
+  end
 end

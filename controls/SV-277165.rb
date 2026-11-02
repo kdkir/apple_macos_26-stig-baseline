@@ -25,4 +25,8 @@ If the result is not "1", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000154', 'CCI-000158', 'CCI-000162', 'CCI-000163', 'CCI-000164', 'CCI-000169', 'CCI-000213', 'CCI-001876', 'CCI-001090', 'CCI-001493', 'CCI-001494', 'CCI-001495', 'CCI-001499', 'CCI-001496', 'CCI-001878']
   tag nist: ['AU-6 (4)', 'AU-7 (1)', 'AU-9 a', 'AU-9 a', 'AU-9 a', 'AU-12 a', 'AC-3', 'AU-7 a', 'SC-4', 'AU-9 a', 'AU-9', 'AU-9', 'CM-5 (6)', 'AU-9 (3)', 'AU-7 a']
+
+  describe command('/usr/bin/csrutil status') do
+    its('stdout') { should include 'System Integrity Protection status: enabled.' }
+  end
 end

@@ -25,4 +25,8 @@ If the result is not "1", this is a finding.'
   tag 'documentable'
   tag cci: ['CCI-002696', 'CCI-002699', 'CCI-002702']
   tag nist: ['SI-6 a', 'SI-6 b', 'SI-6 d']
+
+  describe command('/usr/libexec/mdmclient QuerySecurityInfo') do
+    its('stdout') { should match(/SecureBootLevel = full/) }
+  end
 end

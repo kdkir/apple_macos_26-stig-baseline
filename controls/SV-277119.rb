@@ -32,4 +32,12 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-001813']
   tag nist: ['CM-5 (1) (a)']
+
+  describe macos_managed_preference('com.apple.MCX', 'DisableGuestAccount') do
+    its('value') { should eq true }
+  end
+
+  describe macos_managed_preference('com.apple.MCX', 'EnableGuestAccount') do
+    its('value') { should eq false }
+  end
 end

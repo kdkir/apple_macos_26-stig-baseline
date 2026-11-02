@@ -23,4 +23,8 @@ If the result is not "1", this is a finding.'
   tag 'documentable'
   tag cci: ['CCI-000172']
   tag nist: ['AU-12 c']
+
+  describe command('/usr/bin/sudo -V') do
+    its('stdout') { should include 'Log when a command is allowed by sudoers' }
+  end
 end

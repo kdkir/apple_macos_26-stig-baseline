@@ -30,4 +30,14 @@ done"
   tag 'documentable'
   tag cci: ['CCI-000206']
   tag nist: ['IA-6']
+
+  users_with_hints = command('/usr/bin/dscl . -list /Users hint').stdout.lines.filter_map do |line|
+    name, hint = line.strip.split(/\s+/, 2)
+    name unless hint.to_s.empty?
+  end
+
+  describe 'Local user accounts with a password hint' do
+    subject { users_with_hints }
+    it { should be_empty }
+  end
 end

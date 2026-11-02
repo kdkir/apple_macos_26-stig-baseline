@@ -38,4 +38,12 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000381']
   tag nist: ['CM-7 a']
+
+  describe macos_managed_preference('com.apple.applicationaccess.new', 'familyControlsEnabled') do
+    its('value') { should eq true }
+  end
+
+  describe macos_managed_preference('com.apple.applicationaccess.new', 'pathBlackList') do
+    its('value') { should include '/Applications/FaceTime.app' }
+  end
 end

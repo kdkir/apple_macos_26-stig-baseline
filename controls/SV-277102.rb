@@ -28,4 +28,8 @@ Note: Systemsetup with -setremoteappleevents flag will fail unless Full Disk Acc
   tag 'documentable'
   tag cci: ['CCI-000213', 'CCI-000382']
   tag nist: ['AC-3', 'CM-7 b']
+
+  describe macos_launchd_service('com.apple.AEServer') do
+    it { should be_disabled }
+  end
 end

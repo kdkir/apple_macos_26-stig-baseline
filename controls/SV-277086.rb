@@ -28,4 +28,12 @@ The system may need a restart for the update to take effect.'
   tag 'documentable'
   tag cci: ['CCI-000213']
   tag nist: ['AC-3']
+
+  describe command('/sbin/nfsd status') do
+    its('stdout') { should match(/nfsd service is disabled/) }
+  end
+
+  describe command('/usr/bin/pgrep nfsd') do
+    its('stdout') { should be_empty }
+  end
 end

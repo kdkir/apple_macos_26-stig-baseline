@@ -50,4 +50,12 @@ SS_RULE=$(/usr/bin/security -q authorizationdb read system.login.screensaver 2>&
   tag 'documentable'
   tag cci: ['CCI-000764', 'CCI-004045']
   tag nist: ['IA-2', 'IA-2 (5)']
+
+  screensaver_rules = macos_authorizationdb('system.login.screensaver').rules
+  effective_rules = screensaver_rules + screensaver_rules.flat_map { |rule| macos_authorizationdb(rule).rules }
+
+  describe 'Rules for the system.login.screensaver right (including delegated rules)' do
+    subject { effective_rules }
+    it { should include 'authenticate-session-owner' }
+  end
 end

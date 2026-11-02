@@ -23,4 +23,9 @@ If the result is not "pass", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000044', 'CCI-002238']
   tag nist: ['AC-7 a', 'AC-7 b']
+
+  describe macos_pwpolicy do
+    its('auto_enable_in_seconds') { should_not be_empty }
+    its('auto_enable_in_seconds') { should all be >= 900 }
+  end
 end

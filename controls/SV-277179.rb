@@ -30,4 +30,8 @@ If the result is not "1", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000366']
   tag nist: ['CM-6 b']
+
+  describe command('/usr/bin/profiles status -type enrollment') do
+    its('stdout') { should match(/MDM enrollment: Yes \(User Approved\)/) }
+  end
 end

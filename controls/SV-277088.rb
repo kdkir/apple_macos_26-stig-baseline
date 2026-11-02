@@ -21,4 +21,8 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000381']
   tag nist: ['CM-7 a']
+
+  describe macos_managed_preference('com.apple.mDNSResponder', 'NoMulticastAdvertisements') do
+    its('value') { should eq true }
+  end
 end

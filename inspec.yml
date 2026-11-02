@@ -8,10 +8,10 @@ summary: InSpec profile aligned to STIG Guidance for Apple macOS 26 (Tahoe)
   Security Technical Implementation Guide
 description: null
 version: 1.4.0
-supports: []
+supports:
+  - platform: darwin
 depends: []
-inspec_version: |
-  "~>6.0"
+inspec_version: ">= 6.0"
 
 
 ### INPUTS ###
@@ -31,3 +31,79 @@ inspec_version: |
 ###
 
 inputs:
+  - name: banner_text
+    description: 'Exact text of /etc/banner, the remote access (SSH) notice and consent banner (SV-277037).'
+    type: String
+    value: |
+      You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.
+
+      By using this IS (which includes any device attached to this IS), you consent to the following conditions:
+
+      -The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.
+
+      -At any time, the USG may inspect and seize data stored on this IS.
+
+      -Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.
+
+      -This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
+
+      -Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details.
+
+  - name: policy_banner_text
+    description: 'Text of the login window policy banner /Library/Security/PolicyBanner.rtf(d), compared whitespace-normalized (SV-277039).'
+    type: String
+    value: |
+      You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only. By using this IS (which includes any device attached to this IS), you consent to the following conditions:
+
+      -The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.
+
+      -At any time, the USG may inspect and seize data stored on this IS.
+
+      -Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG authorized purpose.
+
+      -This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
+
+      -Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details.
+
+  - name: approved_time_servers
+    description: 'Authoritative time servers approved for the network; every server in com.apple.MCX timeServer must be in this list (SV-277057).'
+    type: Array
+    value:
+      - tick.usno.navy.mil
+      - tock.usno.navy.mil
+
+  - name: approved_certificate_authorities
+    description: 'Labels of certificates permitted in the System keychain, including approved CAs and system-generated identities (SV-277143).'
+    type: Array
+    value:
+      - DoD Root CA 3
+      - DoD Root CA 4
+      - DoD Root CA 5
+      - DoD Root CA 6
+      - com.apple.systemdefault
+      - com.apple.kerberos.kdc
+
+  - name: temporary_accounts
+    description: 'Local temporary or emergency accounts that must expire automatically; leave empty if none exist (SV-277034).'
+    type: Array
+    value: []
+
+  - name: temporary_account_max_lifetime_seconds
+    description: 'Maximum lifetime in seconds allowed for temporary or emergency accounts (72 hours) (SV-277034).'
+    type: Numeric
+    value: 259200
+
+  - name: camera_installed
+    description: 'Set to false if the system has no built-in or attached camera (SV-277099).'
+    type: Boolean
+    value: true
+
+  - name: camera_physically_protected
+    description: 'Set to true if the camera is covered, disconnected, or physically disabled when not in use (SV-277099).'
+    type: Boolean
+    value: false
+
+  - name: minimum_supported_macos_version
+    description: 'Lowest macOS major version still supported by the vendor (SV-282964).'
+    type: Numeric
+    value: 26

@@ -27,4 +27,9 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-004066', 'CCI-004065']
   tag nist: ['IA-5 (1) (h)', 'IA-5 (1) (g)']
+
+  describe 'pwpolicy password content rules' do
+    subject { macos_pwpolicy.policy_contents }
+    it { should(be_any { |c| c.include?("policyAttributePassword matches '^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$'") }) }
+  end
 end

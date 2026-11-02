@@ -31,4 +31,12 @@ If the result is not "1", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-001199', 'CCI-002475', 'CCI-002476']
   tag nist: ['SC-28', 'SC-28 (1)', 'SC-28 (1)']
+
+  describe macos_managed_preference('com.apple.MCX', 'dontAllowFDEDisable') do
+    its('value') { should eq true }
+  end
+
+  describe command('/usr/bin/fdesetup status') do
+    its('stdout') { should include 'FileVault is On.' }
+  end
 end

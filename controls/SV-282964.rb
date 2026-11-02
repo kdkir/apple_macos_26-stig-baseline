@@ -23,4 +23,11 @@ If the operating system version is no longer supported by the vendor, this is a 
   tag 'documentable'
   tag cci: ['CCI-003376']
   tag nist: ['SA-22 a']
+
+  minimum_version = input('minimum_supported_macos_version')
+
+  describe 'The installed macOS major version' do
+    subject { command('/usr/bin/sw_vers -productVersion').stdout.strip.split('.').first.to_i }
+    it { should cmp >= minimum_version }
+  end
 end

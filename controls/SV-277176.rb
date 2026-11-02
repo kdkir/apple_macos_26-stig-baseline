@@ -38,4 +38,12 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-003980']
   tag nist: ['CM-11 (2)']
+
+  describe macos_managed_preference('com.apple.applicationaccess.new', 'familyControlsEnabled') do
+    its('value') { should eq true }
+  end
+
+  describe macos_managed_preference('com.apple.applicationaccess.new', 'pathBlackList') do
+    its('value') { should include '/Users/' }
+  end
 end

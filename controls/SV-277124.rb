@@ -28,4 +28,8 @@ If the result is not "false", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000381', 'CCI-001443']
   tag nist: ['CM-7 a', 'AC-18 (1)']
+
+  describe macos_managed_preference('com.apple.applicationaccess', 'allowAirPlayIncomingRequests') do
+    its('value') { should eq false }
+  end
 end

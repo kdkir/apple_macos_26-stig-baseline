@@ -28,4 +28,8 @@ Note: To reenable "Authenticated Root", boot the affected system into "Recovery"
   tag 'documentable'
   tag cci: ['CCI-000213']
   tag nist: ['AC-3']
+
+  describe command('/usr/libexec/mdmclient QuerySecurityInfo') do
+    its('stdout') { should match(/AuthenticatedRootVolumeEnabled = 1;/) }
+  end
 end

@@ -55,4 +55,15 @@ By using this IS (which includes any device attached to this IS), you consent to
   tag 'documentable'
   tag cci: ['CCI-000048', 'CCI-000050']
   tag nist: ['AC-8 a', 'AC-8 b']
+
+  expected_banner = input('banner_text').rstrip
+
+  describe file('/etc/banner') do
+    it { should exist }
+  end
+
+  describe 'The contents of /etc/banner' do
+    subject { file('/etc/banner').content.to_s.rstrip }
+    it { should eq expected_banner }
+  end
 end

@@ -20,4 +20,8 @@ If the result is not "1", this is a finding.'
   tag 'documentable'
   tag cci: ['CCI-000381']
   tag nist: ['CM-7 a']
+
+  describe command('/usr/libexec/mdmclient QuerySecurityInfo') do
+    its('stdout') { should match(/RemoteDesktopEnabled = 0/) }
+  end
 end

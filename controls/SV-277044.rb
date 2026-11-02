@@ -42,4 +42,8 @@ done)
   tag 'documentable'
   tag cci: ['CCI-001133']
   tag nist: ['SC-10']
+
+  describe sshd_effective_config do
+    its(['clientalivecountmax']) { should cmp '1' }
+  end
 end

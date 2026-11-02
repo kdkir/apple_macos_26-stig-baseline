@@ -26,4 +26,8 @@ If the result is not "1", this is a finding.'
   tag 'documentable'
   tag cci: ['CCI-002038']
   tag nist: ['IA-11']
+
+  describe command('/usr/bin/sudo -V') do
+    its('stdout') { should include 'Authentication timestamp timeout: 0.0 minutes' }
+  end
 end

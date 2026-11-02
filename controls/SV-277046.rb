@@ -61,4 +61,10 @@ done)
   tag 'documentable'
   tag cci: ['CCI-000068', 'CCI-000803', 'CCI-001453', 'CCI-002890', 'CCI-003123', 'CCI-002450', 'CCI-002421']
   tag nist: ['AC-17 (2)', 'IA-7', 'AC-17 (2)', 'MA-4 (6)', 'MA-4 (6)', 'SC-13 b', 'SC-8 (1)']
+
+  describe sshd_effective_config do
+    MacosSshEffectiveConfigParser::FIPS_ALGORITHMS.each do |keyword, value|
+      its([keyword]) { should cmp value }
+    end
+  end
 end

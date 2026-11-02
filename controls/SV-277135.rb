@@ -23,4 +23,8 @@ If the result is not "2", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000381']
   tag nist: ['CM-7 a']
+
+  describe macos_managed_preference('com.apple.assistant.support', 'Siri Data Sharing Opt-In Status') do
+    its('value') { should eq 2 }
+  end
 end

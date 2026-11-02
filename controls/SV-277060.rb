@@ -33,4 +33,8 @@ A text editor may also be used to implement the required updates to the "/etc/se
   tag 'documentable'
   tag cci: ['CCI-000018', 'CCI-001403', 'CCI-001404', 'CCI-001405', 'CCI-002130', 'CCI-002234', 'CCI-003938', 'CCI-002884', 'CCI-000172']
   tag nist: ['AC-2 (4)', 'AC-2 (4)', 'AC-2 (4)', 'AC-2 (4)', 'AC-2 (4)', 'AC-6 (9)', 'CM-5 (1) (b)', 'MA-4 (1) (a)', 'AU-12 c']
+
+  describe macos_audit_control do
+    its('flags') { should include 'ad' }
+  end
 end

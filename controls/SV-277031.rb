@@ -30,4 +30,8 @@ Note: To ensure continued access to the operating system, consult the supplement
   tag 'documentable'
   tag cci: ['CCI-000057']
   tag nist: ['AC-11 a']
+
+  describe macos_managed_preference('com.apple.security.smartcard', 'tokenRemovalAction') do
+    its('value') { should eq 1 }
+  end
 end

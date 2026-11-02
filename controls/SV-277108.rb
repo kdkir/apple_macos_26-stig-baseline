@@ -41,4 +41,9 @@ The system may need a restart for the update to take effect.'
   tag 'documentable'
   tag cci: ['CCI-000197', 'CCI-000213']
   tag nist: ['IA-5 (1) (c)', 'AC-3']
+
+  describe macos_launchd_service('com.apple.tftpd') do
+    it { should_not be_loaded }
+    it { should_not be_enabled }
+  end
 end

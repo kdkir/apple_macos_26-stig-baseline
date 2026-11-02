@@ -23,4 +23,8 @@ If the result is not "-1", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000060']
   tag nist: ['AC-11 (1)']
+
+  describe macos_managed_preference('com.apple.loginwindow', 'AdminHostInfo') do
+    its('value') { should cmp(-1) }
+  end
 end

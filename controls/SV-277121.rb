@@ -26,4 +26,8 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000764', 'CCI-000366']
   tag nist: ['IA-2', 'CM-6 b']
+
+  describe macos_managed_preference('com.apple.loginwindow', 'com.apple.login.mcx.DisableAutoLoginClient') do
+    its('value') { should eq true }
+  end
 end

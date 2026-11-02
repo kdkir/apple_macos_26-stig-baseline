@@ -22,4 +22,9 @@ If the result is not "1", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-004066']
   tag nist: ['IA-5 (1) (h)']
+
+  describe 'pwpolicy identifiers requiring an alphanumeric password' do
+    subject { macos_pwpolicy.policy_identifiers.grep(/requireAlphanumeric/) }
+    it { should_not be_empty }
+  end
 end

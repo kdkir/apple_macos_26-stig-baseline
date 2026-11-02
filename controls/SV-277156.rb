@@ -47,4 +47,9 @@ After saving the file and exiting to the command prompt, run the following comma
   tag 'documentable'
   tag cci: ['CCI-004066']
   tag nist: ['IA-5 (1) (h)']
+
+  describe macos_pwpolicy do
+    its('minimum_lifetime_hours') { should_not be_empty }
+    its('minimum_lifetime_hours') { should all be >= 24 }
+  end
 end

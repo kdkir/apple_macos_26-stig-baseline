@@ -21,4 +21,8 @@ If the result is not "1", this is a finding.'
   tag 'documentable'
   tag cci: ['CCI-000381']
   tag nist: ['CM-7 a']
+
+  describe command('/usr/sbin/cupsctl') do
+    its('stdout') { should include '_share_printers=0' }
+  end
 end

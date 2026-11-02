@@ -22,4 +22,9 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-004066']
   tag nist: ['IA-5 (1) (h)']
+
+  describe macos_pwpolicy do
+    its('minimum_length') { should_not be_nil }
+    its('minimum_length') { should cmp >= 14 }
+  end
 end

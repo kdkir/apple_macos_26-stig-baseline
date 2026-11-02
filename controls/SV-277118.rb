@@ -29,4 +29,8 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-002418']
   tag nist: ['SC-8']
+
+  describe macos_managed_preference('com.apple.MCXBluetooth', 'DisableBluetooth') do
+    its('value') { should eq true }
+  end
 end

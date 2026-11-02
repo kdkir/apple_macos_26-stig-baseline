@@ -29,4 +29,8 @@ If the result is not "1", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000162', 'CCI-000163', 'CCI-000164', 'CCI-000172', 'CCI-001493', 'CCI-001494', 'CCI-001495', 'CCI-003938', 'CCI-002884']
   tag nist: ['AU-9 a', 'AU-9 a', 'AU-9 a', 'AU-12 c', 'AU-9 a', 'AU-9', 'AU-9', 'CM-5 (1) (b)', 'MA-4 (1) (a)']
+
+  describe macos_audit_control do
+    its('flags') { should include '-fr' }
+  end
 end

@@ -30,4 +30,9 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000057']
   tag nist: ['AC-11 a']
+
+  describe macos_managed_preference('com.apple.screensaver', 'idleTime') do
+    its('value') { should_not be_nil }
+    its('value') { should cmp <= 900 }
+  end
 end

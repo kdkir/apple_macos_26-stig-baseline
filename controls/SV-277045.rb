@@ -38,4 +38,8 @@ done)
   tag 'documentable'
   tag cci: ['CCI-001133']
   tag nist: ['SC-10']
+
+  describe sshd_effective_config do
+    its(['logingracetime']) { should cmp '30' }
+  end
 end

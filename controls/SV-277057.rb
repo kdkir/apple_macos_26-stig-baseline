@@ -26,4 +26,13 @@ If the result is not an authoritative time server that is synchronized with redu
   tag 'documentable'
   tag cci: ['CCI-004923', 'CCI-004926']
   tag nist: ['SC-45 (1) (a)', 'SC-45 (1) (b)']
+
+  approved_time_servers = input('approved_time_servers')
+  time_servers = macos_managed_preference('com.apple.MCX', 'timeServer').value.to_s.split(/[\s,]+/).reject(&:empty?)
+
+  describe 'Time servers configured in com.apple.MCX timeServer' do
+    subject { time_servers }
+    it { should_not be_empty }
+    it { should all be_in approved_time_servers }
+  end
 end

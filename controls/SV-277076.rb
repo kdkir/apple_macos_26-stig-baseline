@@ -22,4 +22,8 @@ If the result is not "1", this is a finding.'
   tag 'documentable'
   tag cci: ['CCI-001858']
   tag nist: ['AU-5 (2)']
+
+  describe file('/etc/security/audit_warn') do
+    its('content') { should include 'logger -s -p' }
+  end
 end

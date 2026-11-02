@@ -25,4 +25,8 @@ If the result is not "25", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000139', 'CCI-001855']
   tag nist: ['AU-5 a', 'AU-5 (1)']
+
+  describe macos_audit_control do
+    its('minfree') { should cmp 25 }
+  end
 end

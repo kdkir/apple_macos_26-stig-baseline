@@ -36,4 +36,12 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000213']
   tag nist: ['AC-3']
+
+  describe macos_managed_preference('com.apple.applicationaccess', 'allowMediaSharing') do
+    its('value') { should eq false }
+  end
+
+  describe macos_managed_preference('com.apple.applicationaccess', 'allowMediaSharingModification') do
+    its('value') { should eq false }
+  end
 end

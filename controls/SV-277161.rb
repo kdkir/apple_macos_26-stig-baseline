@@ -25,4 +25,15 @@ If the result is not "0", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-001312', 'CCI-001314']
   tag nist: ['SI-11 a', 'SI-11 b']
+
+  log_files = file('/etc/newsyslog.conf').content.to_s.lines.filter_map do |line|
+    path = line.split.first
+    path if path&.start_with?('/')
+  end
+  offenders = macos_file_stats(log_files).entries.reject { |e| e.owner == 'root' && e.group == 'wheel' }.map(&:path)
+
+  describe 'newsyslog-managed log files not owned by root:wheel' do
+    subject { offenders }
+    it { should be_empty }
+  end
 end

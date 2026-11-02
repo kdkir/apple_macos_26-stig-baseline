@@ -25,4 +25,8 @@ If the result is not "tty", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-002038']
   tag nist: ['IA-11']
+
+  describe command('/usr/bin/sudo -V') do
+    its('stdout') { should match(/^Type of authentication timestamp record: tty$/) }
+  end
 end

@@ -36,4 +36,19 @@ CURRENT_USER=$( /usr/sbin/scutil <<< "show State:/Users/ConsoleUser" | /usr/bin/
   tag 'documentable'
   tag cci: ['CCI-000213', 'CCI-000381']
   tag nist: ['AC-3', 'CM-7 a']
+
+  console_user = command('/usr/bin/stat -f %Su /dev/console').stdout.strip
+  users = %w[root loginwindow].include?(console_user) || console_user.empty? ? macos_local_users.interactive : [console_user]
+
+  if users.empty?
+    describe 'Local interactive user accounts' do
+      skip 'No console user or local interactive user accounts were found to evaluate.'
+    end
+  else
+    users.each do |user|
+      describe command("/usr/bin/sudo -u #{user} /usr/bin/defaults -currentHost read com.apple.Bluetooth PrefKeyServicesEnabled") do
+        its('stdout.strip') { should cmp '0' }
+      end
+    end
+  end
 end

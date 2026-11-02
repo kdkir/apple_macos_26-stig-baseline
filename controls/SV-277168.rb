@@ -23,4 +23,8 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000764']
   tag nist: ['IA-2']
+
+  describe macos_managed_preference('com.apple.loginwindow', 'SHOWFULLNAME') do
+    its('value') { should eq true }
+  end
 end

@@ -35,4 +35,22 @@ If the result is not "false", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000381']
   tag nist: ['CM-7 a']
+
+  camera_protected = input('camera_physically_protected')
+
+  if !input('camera_installed')
+    impact 0.0
+    describe 'Camera (input camera_installed)' do
+      skip 'No camera is installed; this requirement is not applicable.'
+    end
+  elsif camera_protected
+    describe 'Camera is covered, disconnected, or physically disabled (attested via input camera_physically_protected)' do
+      subject { camera_protected }
+      it { should eq true }
+    end
+  else
+    describe macos_managed_preference('com.apple.applicationaccess', 'allowCamera') do
+      its('value') { should eq false }
+    end
+  end
 end

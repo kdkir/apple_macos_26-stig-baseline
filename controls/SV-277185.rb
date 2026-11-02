@@ -27,4 +27,18 @@ If enrolled in an MDM, consult the MDM's documentation for automated methods."
   tag 'documentable'
   tag cci: ['CCI-002605']
   tag nist: ['SI-2 c']
+
+  last_check = command('/usr/bin/defaults read /Library/Preferences/com.apple.SoftwareUpdate.plist LastFullSuccessfulDate').stdout.strip
+  now = command('/bin/date +%s').stdout.to_i
+  days_since_update = begin
+    (now - Time.parse(last_check).to_i) / 86_400
+  rescue ArgumentError
+    nil
+  end
+
+  describe "Days since the last successful software update (LastFullSuccessfulDate: #{last_check.empty? ? 'not set' : last_check})" do
+    subject { days_since_update }
+    it { should_not be_nil }
+    it { should cmp <= 30 }
+  end
 end

@@ -79,4 +79,22 @@ done'
   tag 'documentable'
   tag cci: ['CCI-002235']
   tag nist: ['AC-6 (10)']
+
+  %w[
+    system.preferences
+    system.preferences.energysaver
+    system.preferences.network
+    system.preferences.printing
+    system.preferences.sharing
+    system.preferences.softwareupdate
+    system.preferences.startupdisk
+    system.preferences.timemachine
+  ].each do |right|
+    describe macos_authorizationdb(right) do
+      its(['shared']) { should eq false }
+      its(['group']) { should cmp 'admin' }
+      its(['authenticate-user']) { should eq true }
+      its(['session-owner']) { should eq false }
+    end
+  end
 end

@@ -32,4 +32,8 @@ Note: To ensure continued access to the operating system, consult the supplement
   tag 'documentable'
   tag cci: ['CCI-000185', 'CCI-001954', 'CCI-004068', 'CCI-002470']
   tag nist: ['IA-5 (2) (b) (1)', 'IA-2 (12)', 'IA-5 (2) (b) (2)', 'SC-23 (5)']
+
+  describe macos_managed_preference('com.apple.security.smartcard', 'checkCertificateTrust') do
+    its('value') { should eq 2 }
+  end
 end

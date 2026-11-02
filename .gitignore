@@ -73,3 +73,10 @@ report.md
 *xccdf.xml
 check-results.txt
 kitchen.local.ec2.yml
+
+# macOS test VM disk
+/test/macos-vm/storage/
+/test/macos-vm/results*.json
+test/macos-vm/compose.yml
+test/macos-vm/README.md
+test/macos-vm/summarize.rb

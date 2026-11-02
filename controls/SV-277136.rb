@@ -25,4 +25,15 @@ If the result is not "true", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000381']
   tag nist: ['CM-7 a']
+
+  if command('/usr/bin/uname -m').stdout.strip != 'arm64'
+    impact 0.0
+    describe 'On Device Only Dictation' do
+      skip 'This requirement is not applicable to Intel-based systems.'
+    end
+  else
+    describe macos_managed_preference('com.apple.applicationaccess', 'forceOnDeviceOnlyDictation') do
+      its('value') { should eq true }
+    end
+  end
 end

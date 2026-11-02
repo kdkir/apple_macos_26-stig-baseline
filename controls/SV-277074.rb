@@ -22,4 +22,8 @@ If the result is not "7d", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-001849']
   tag nist: ['AU-4']
+
+  describe macos_audit_control do
+    its('expire_after') { should cmp '7d' }
+  end
 end

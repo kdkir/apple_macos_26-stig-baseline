@@ -23,4 +23,8 @@ If the result is not "0", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-000206']
   tag nist: ['IA-6']
+
+  describe macos_managed_preference('com.apple.loginwindow', 'RetriesUntilHint') do
+    its('value') { should eq 0 }
+  end
 end

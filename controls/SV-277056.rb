@@ -28,4 +28,8 @@ If the result is not "86400", this is a finding.)
   tag 'documentable'
   tag cci: ['CCI-002361']
   tag nist: ['AC-12']
+
+  describe macos_managed_preference('.GlobalPreferences', 'com.apple.autologout.AutoLogOutDelay') do
+    its('value') { should eq 86400 }
+  end
 end

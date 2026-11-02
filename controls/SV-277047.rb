@@ -74,4 +74,20 @@ done)
   tag 'documentable'
   tag cci: ['CCI-000068', 'CCI-000803', 'CCI-001453', 'CCI-002450', 'CCI-002421']
   tag nist: ['AC-17 (2)', 'IA-7', 'AC-17 (2)', 'SC-13 b', 'SC-8 (1)']
+
+  users = macos_local_users.interactive
+
+  if users.empty?
+    describe 'Local interactive user accounts' do
+      skip 'No local interactive user accounts were found to evaluate.'
+    end
+  else
+    users.each do |user|
+      describe ssh_effective_config(user) do
+        MacosSshEffectiveConfigParser::FIPS_ALGORITHMS.each do |keyword, value|
+          its([keyword]) { should cmp value }
+        end
+      end
+    end
+  end
 end

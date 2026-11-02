@@ -24,4 +24,8 @@ The system may need a restart for the update to take effect.'
   tag 'documentable'
   tag cci: ['CCI-000213']
   tag nist: ['AC-3']
+
+  describe macos_launchd_service('com.apple.smbd') do
+    it { should be_disabled }
+  end
 end

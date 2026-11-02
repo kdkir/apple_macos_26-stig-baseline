@@ -10,13 +10,13 @@ The default behavior of macOS is to allow all valid users access to the top leve
 /usr/bin/find /System/Volumes/Data/Users -mindepth 1 -maxdepth 1 -type d ! \\( -perm 700 -o -perm 711 \\) | /usr/bin/grep -v "Shared" | /usr/bin/grep -v "Guest" | /usr/bin/wc -l | /usr/bin/xargs
 
 If the result is not "0", this is a finding.'
-  desc 'fix', %q(Configure the macOS system to set the appropriate permissions for each user on the system with the following command:
+  desc 'fix', %q{Configure the macOS system to set the appropriate permissions for each user on the system with the following command:
 
 IFS=$'\n'
 for userDirs in $( /usr/bin/find /System/Volumes/Data/Users -mindepth 1 -maxdepth 1 -type d ! \( -perm 700 -o -perm 711 \\) | /usr/bin/grep -v "Shared" | /usr/bin/grep -v "Guest" ); do
 /bin/chmod og-rwx "$userDirs"
 done
-unset IFS)
+unset IFS}
   impact 0.5
   tag check_id: 'C-81277r1148816_chk'
   tag severity: 'medium'
@@ -29,4 +29,12 @@ unset IFS)
   tag 'documentable'
   tag cci: ['CCI-000366']
   tag nist: ['CM-6 b']
+
+  home_dirs = command('/usr/bin/find /System/Volumes/Data/Users -mindepth 1 -maxdepth 1 -type d ! \( -perm 700 -o -perm 711 \)').stdout.lines.map(&:strip)
+  offenders = home_dirs.reject { |d| d.empty? || d.include?('Shared') || d.include?('Guest') }
+
+  describe 'User home directories not set to mode 700 or 711' do
+    subject { offenders }
+    it { should be_empty }
+  end
 end

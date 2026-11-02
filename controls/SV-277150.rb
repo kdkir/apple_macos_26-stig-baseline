@@ -34,4 +34,8 @@ Note: To ensure continued access to the operating system, consult the supplement
   tag 'documentable'
   tag cci: ['CCI-000186', 'CCI-000765', 'CCI-000766', 'CCI-001941', 'CCI-004046', 'CCI-001953', 'CCI-004047']
   tag nist: ['IA-5 (2) (a) (1)', 'IA-2 (1)', 'IA-2 (2)', 'IA-2 (8)', 'IA-2 (6) (a)', 'IA-2 (12)', 'IA-2 (6) (b)']
+
+  describe macos_managed_preference('com.apple.security.smartcard', 'enforceSmartCard') do
+    its('value') { should eq true }
+  end
 end
